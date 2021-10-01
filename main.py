@@ -16,7 +16,7 @@ from Utils import Utils
 
 
 def folderStructureCreation(dirPath):
-    print("Checking Folder structure...", end="")
+    print("Checking Folder structure...")
 
     folderList = ['in', 'out', 'log', 'error', 'template']
 
@@ -26,6 +26,10 @@ def folderStructureCreation(dirPath):
         # Check if folder exist
         if not path.exists(folderPath):
             os.makedirs(folderPath)
+
+    if not os.listdir(inPath):
+        print(inPath + ' is empty.', end="")
+        quit()
 
     print("Done!")
 
@@ -314,6 +318,14 @@ def dropColumn3Last(df):
     pass
 
 
+def compressAndDelete(dir_name):
+    output_filename = os.path.join(dirPath, 'ERROR_LOG - Registration_of_Moderna_Order_for_HH_' + dateTime)
+    shutil.make_archive(output_filename, 'zip', dir_name)
+
+    shutil.rmtree(errPath)
+    pass
+
+
 if __name__ == '__main__':
     pd.set_option('display.max_columns', None)
     pd.set_option('display.max_rows', None)
@@ -322,15 +334,21 @@ if __name__ == '__main__':
     today = datetime.today()
     dateTime = today.strftime("%m%d%y%H%M%S")
 
-    #MAC OS Path
-    dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
+    print('Enter source folder path:')
+    dpath = input()
+
+    dirPath = dpath
+
+    # #MAC OS Path
+    # dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
 
     inPath = os.path.join(dirPath, "in")
     outPath = os.path.join(dirPath, "out")
     errPath = os.path.join(dirPath, "error")
     logPath = os.path.join(dirPath, "log")
     backupPath = os.path.join(dirPath, "backup")
-    templateFilePath = os.path.join(dirPath, "template/template_v1.xlsx")
+    # templateFilePath = os.path.join(dirPath, "template/template_v1.xlsx")
+    templateFilePath = 'src/template/template_v1.xlsx'
 
     outFilename = 'Registration_of_Moderna_Order_for_HH_Conso_' + dateTime
 
@@ -359,6 +377,8 @@ if __name__ == '__main__':
     dropInvalidControlNumber(master_df)
 
     dropColumn3Last(master_df)
+
+    compressAndDelete(errPath)
 
     master_df.drop_duplicates(subset=['Reservation Control Number'], keep=False, inplace=True)
 
