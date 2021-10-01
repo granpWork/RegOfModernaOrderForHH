@@ -278,7 +278,7 @@ def generateErrorCtrlNumberDup(df):
         for j, row in records.iterrows():
             arrid.append(row['ID'])
 
-        errMsg.append("Error: " + comp + " - Duplicate Control Number found in ID [" + ','.join(arrid) + "]")
+        errMsg.append("Error: " + comp + " - Duplicate Control Number found in ID [" + ','.join(list(dict.fromkeys(arrid))) + "]")
 
         arrid.clear()
 
@@ -338,13 +338,13 @@ if __name__ == '__main__':
     print("Running Scpirt: REgistration of Moderna Order for HHE Consolidation......")
     print("==============================================================")
 
-    print('Enter source folder path:')
-    dpath = input()
-
-    dirPath = dpath
+    # print('Enter source folder path:')
+    # dpath = input()
+    #
+    # dirPath = dpath
 
     # #MAC OS Path
-    # dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
+    dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
 
     # #WIN OS Path
     # dirPath = "C:\Users\admin\Documents\reg"
