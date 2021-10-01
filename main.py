@@ -322,6 +322,7 @@ if __name__ == '__main__':
     today = datetime.today()
     dateTime = today.strftime("%m%d%y%H%M%S")
 
+    #MAC OS Path
     dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
 
     inPath = os.path.join(dirPath, "in")
