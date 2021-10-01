@@ -334,6 +334,10 @@ if __name__ == '__main__':
     today = datetime.today()
     dateTime = today.strftime("%m%d%y%H%M%S")
 
+    print("==============================================================")
+    print("Running Scpirt: REgistration of Moderna Order for HHE Consolidation......")
+    print("==============================================================")
+
     print('Enter source folder path:')
     dpath = input()
 
@@ -341,6 +345,9 @@ if __name__ == '__main__':
 
     # #MAC OS Path
     # dirPath = r"/Users/Ran/Documents/Vaccine/RegOfModernaOrderForHH"
+
+    # #WIN OS Path
+    # dirPath = "C:\Users\admin\Documents\reg"
 
     inPath = os.path.join(dirPath, "in")
     outPath = os.path.join(dirPath, "out")
@@ -355,9 +362,7 @@ if __name__ == '__main__':
     # Folder Structure Creation
     folderStructureCreation(dirPath)
 
-    logging.info("==============================================================")
-    logging.info("Running Scpirt: REgistration of Moderna Order for HH Consolidation......")
-    logging.info("==============================================================")
+
 
     # Get all Files in
     arrFilenames = os.listdir(inPath)
